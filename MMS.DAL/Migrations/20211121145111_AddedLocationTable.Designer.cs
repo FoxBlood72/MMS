@@ -4,75 +4,22 @@ using MMS.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MMS.DAL.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    partial class DB_ContextModelSnapshot : ModelSnapshot
+    [Migration("20211121145111_AddedLocationTable")]
+    partial class AddedLocationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("MMS.DAL.Entities.Commander", b =>
-                {
-                    b.Property<int>("id_personal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("max_soldiers")
-                        .HasColumnType("int");
-
-                    b.HasKey("id_personal");
-
-                    b.ToTable("Commanders");
-                });
-
-            modelBuilder.Entity("MMS.DAL.Entities.Conflict", b =>
-                {
-                    b.Property<int>("id_conflict")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("description")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("start_date")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("Date")
-                        .HasDefaultValueSql("GetDate()");
-
-                    b.HasKey("id_conflict");
-
-                    b.ToTable("Conflicts");
-                });
-
-            modelBuilder.Entity("MMS.DAL.Entities.General", b =>
-                {
-                    b.Property<int>("id_personal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("max_div")
-                        .HasColumnType("int");
-
-                    b.HasKey("id_personal");
-
-                    b.ToTable("Generals");
-                });
 
             modelBuilder.Entity("MMS.DAL.Entities.Leader", b =>
                 {
