@@ -18,9 +18,13 @@ namespace MMS.DAL
         public DbSet<Leader> Leaders { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<General> Generals { get; set; }
-        public DbSet<Commander> Commanders { get; set; }
         public DbSet<Conflict> Conflicts { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<MilitaryBase> Bases { get; set; } 
+        public DbSet<Mission> Missions { get; set; }
+        public DbSet<ArmyCorp> Corps { get; set; }
+        
+        public DbSet<Divizion> Divizions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -29,9 +33,12 @@ namespace MMS.DAL
             modelBuilder.ApplyConfiguration(new LeaderConfigurator());
             modelBuilder.ApplyConfiguration(new StateConfigurator());
             modelBuilder.ApplyConfiguration(new LocationConfigurator());
-            modelBuilder.ApplyConfiguration(new GeneralConfigurator());
-            modelBuilder.ApplyConfiguration(new CommanderConfigurator());
             modelBuilder.ApplyConfiguration(new ConflictConfigurator());
+            modelBuilder.ApplyConfiguration(new StateConfigurator());
+            modelBuilder.ApplyConfiguration(new MilitaryBaseConfigurator());
+            modelBuilder.ApplyConfiguration(new MissionConfigurator());
+            modelBuilder.ApplyConfiguration(new ArmyCorpConfigurator());
+            modelBuilder.ApplyConfiguration();
         }
 
 

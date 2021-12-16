@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace MMS
 {
     public class State
@@ -9,5 +11,7 @@ namespace MMS
         public int surface { get; set; }
         public string legislator { get; set; }
         public int id_leader { get; set; }
+        public List<MilitaryBase> bases { get; set; }
+        public List<ArmyCorp> corps { get; set; }
     }
 }

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMS
+namespace MMS.DAL.Entities
 {
-    public class Conflict
+    public class Mission
     {
-        public int id_conflict { get; set; }
+        public int id_mission { get; set; }
         public string name { get; set; }
-        public DateTime start_date { get; set; }
         public string description { get; set; }
+        public DateTime start_date { get; set; }
+        public DateTime end_date { get; set; }
     }
 }

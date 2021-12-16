@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace MMS
 {
     public class PersonalMilitary
@@ -12,5 +14,6 @@ namespace MMS
         public string cnp { get; set; }
         public char sex { get; set; }
         public DateTime hire_date { get; set; }
+        //public List<PersonalMilitary> Commanders { get; set; }
     }
 }
