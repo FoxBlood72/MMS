@@ -4,14 +4,16 @@ using MMS.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MMS.DAL.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    partial class DB_ContextModelSnapshot : ModelSnapshot
+    [Migration("20211217133924_UpdateDatabase")]
+    partial class UpdateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,7 +250,10 @@ namespace MMS.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DivizionID")
+                    b.Property<int>("ID_BASE")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ID_DIVIZION")
                         .HasColumnType("int");
 
                     b.Property<string>("cnp")
@@ -267,9 +272,6 @@ namespace MMS.DAL.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("mBaseIdBase")
-                        .HasColumnType("int");
-
                     b.Property<float>("salary")
                         .HasMaxLength(20)
                         .HasPrecision(2)
@@ -282,10 +284,6 @@ namespace MMS.DAL.Migrations
 
                     b.HasKey("ID_PERS");
 
-                    b.HasIndex("DivizionID");
-
-                    b.HasIndex("mBaseIdBase");
-
                     b.ToTable("Militaries");
                 });
 
@@ -297,12 +295,10 @@ namespace MMS.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("SkillDescription")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SkillName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SkillId");
 
@@ -388,29 +384,9 @@ namespace MMS.DAL.Migrations
                     b.Navigation("state");
                 });
 
-            modelBuilder.Entity("MMS.PersonalMilitary", b =>
-                {
-                    b.HasOne("MMS.DAL.Entities.Divizion", "divizion")
-                        .WithMany("personalMilitaries")
-                        .HasForeignKey("DivizionID");
-
-                    b.HasOne("MMS.MilitaryBase", "mBase")
-                        .WithMany("personalMilitaries")
-                        .HasForeignKey("mBaseIdBase");
-
-                    b.Navigation("divizion");
-
-                    b.Navigation("mBase");
-                });
-
             modelBuilder.Entity("MMS.ArmyCorp", b =>
                 {
                     b.Navigation("divizions");
-                });
-
-            modelBuilder.Entity("MMS.DAL.Entities.Divizion", b =>
-                {
-                    b.Navigation("personalMilitaries");
                 });
 
             modelBuilder.Entity("MMS.Location", b =>
@@ -421,8 +397,6 @@ namespace MMS.DAL.Migrations
             modelBuilder.Entity("MMS.MilitaryBase", b =>
                 {
                     b.Navigation("Garrison");
-
-                    b.Navigation("personalMilitaries");
                 });
 
             modelBuilder.Entity("MMS.State", b =>

@@ -41,6 +41,7 @@ namespace MMS.DAL
             modelBuilder.ApplyConfiguration(new MissionConfigurator());
             modelBuilder.ApplyConfiguration(new ArmyCorpConfigurator());
             modelBuilder.ApplyConfiguration(new GarrisonConfigurator());
+            modelBuilder.ApplyConfiguration(new SkillConfigurator());
         }
 
 

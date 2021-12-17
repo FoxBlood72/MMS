@@ -15,7 +15,7 @@ namespace MMS.Configurations
         {
             builder.HasKey(x => x.id_garrison);
             builder.HasOne(x => x.MilitaryBase).WithMany(y => y.Garrison);
-            builder.Property(x => x.start_date).HasColumnType("Date").HasDefaultValue("GetDate()");
+            builder.Property(x => x.start_date).HasColumnType("Date").HasDefaultValueSql("GetDate()");
             builder.Property(x => x.available_rooms).HasColumnType("int");
             builder.Property(x => x.name).HasColumnType("nvarchar(100)").HasMaxLength(100);
         }

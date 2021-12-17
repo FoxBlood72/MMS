@@ -8,7 +8,7 @@ namespace MMS
 {
     public class Skill
     {
-        public int IdSkill { get; set; }
+        public int SkillId { get; set; }
         public string SkillName { get; set; }
         public string SkillDescription { get; set; }
 

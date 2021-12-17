@@ -16,6 +16,7 @@ namespace MMS
         public DateTime FoundDate { get; set; }
 
         public List<Garrison> Garrison { get; set; }
+        public List<PersonalMilitary> personalMilitaries { get; set; }
 
     }
 }

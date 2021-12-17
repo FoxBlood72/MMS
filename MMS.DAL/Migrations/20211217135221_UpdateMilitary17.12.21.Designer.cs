@@ -4,14 +4,16 @@ using MMS.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MMS.DAL.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    partial class DB_ContextModelSnapshot : ModelSnapshot
+    [Migration("20211217135221_UpdateMilitary17.12.21")]
+    partial class UpdateMilitary171221
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,6 +253,9 @@ namespace MMS.DAL.Migrations
                     b.Property<int?>("DivizionID")
                         .HasColumnType("int");
 
+                    b.Property<int>("ID_BASE")
+                        .HasColumnType("int");
+
                     b.Property<string>("cnp")
                         .HasColumnType("nvarchar(max)");
 
@@ -267,9 +272,6 @@ namespace MMS.DAL.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("mBaseIdBase")
-                        .HasColumnType("int");
-
                     b.Property<float>("salary")
                         .HasMaxLength(20)
                         .HasPrecision(2)
@@ -283,8 +285,6 @@ namespace MMS.DAL.Migrations
                     b.HasKey("ID_PERS");
 
                     b.HasIndex("DivizionID");
-
-                    b.HasIndex("mBaseIdBase");
 
                     b.ToTable("Militaries");
                 });
@@ -394,13 +394,7 @@ namespace MMS.DAL.Migrations
                         .WithMany("personalMilitaries")
                         .HasForeignKey("DivizionID");
 
-                    b.HasOne("MMS.MilitaryBase", "mBase")
-                        .WithMany("personalMilitaries")
-                        .HasForeignKey("mBaseIdBase");
-
                     b.Navigation("divizion");
-
-                    b.Navigation("mBase");
                 });
 
             modelBuilder.Entity("MMS.ArmyCorp", b =>
@@ -421,8 +415,6 @@ namespace MMS.DAL.Migrations
             modelBuilder.Entity("MMS.MilitaryBase", b =>
                 {
                     b.Navigation("Garrison");
-
-                    b.Navigation("personalMilitaries");
                 });
 
             modelBuilder.Entity("MMS.State", b =>

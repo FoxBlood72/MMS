@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MMS.DAL.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace MMS
@@ -6,8 +7,8 @@ namespace MMS
     public class PersonalMilitary
     {
         public int ID_PERS { get; set; }
-        public int ID_DIVIZION { get; set; }
-        public int ID_BASE { get; set; }
+        public Divizion divizion { get; set; }
+        public MilitaryBase mBase { get; set; }
         public float salary { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }

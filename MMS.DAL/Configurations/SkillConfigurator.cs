@@ -7,7 +7,7 @@ namespace MMS.Configurations
     {
         public void Configure(EntityTypeBuilder<Skill> builder)
         {
-            builder.HasKey(x => x.IdSkill);
+            builder.HasKey(x => x.SkillId);
             builder.Property(x => x.SkillName).HasColumnType("nvarchar(100)").HasMaxLength(100);
             builder.Property(x => x.SkillDescription).HasColumnType("nvarchar(300)").HasMaxLength(300);
         }

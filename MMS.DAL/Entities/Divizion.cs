@@ -16,5 +16,6 @@ namespace MMS.DAL.Entities
 
         public ArmyCorp Corp { get; set; }
 
+        public List<PersonalMilitary> personalMilitaries { get; set; }
     }
 }
