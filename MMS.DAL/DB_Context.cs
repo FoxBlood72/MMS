@@ -25,6 +25,8 @@ namespace MMS.DAL
         public DbSet<ArmyCorp> Corps { get; set; }
         
         public DbSet<Divizion> Divizions { get; set; }
+        public DbSet<Garrison> Garrisons { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -38,7 +40,7 @@ namespace MMS.DAL
             modelBuilder.ApplyConfiguration(new MilitaryBaseConfigurator());
             modelBuilder.ApplyConfiguration(new MissionConfigurator());
             modelBuilder.ApplyConfiguration(new ArmyCorpConfigurator());
-            modelBuilder.ApplyConfiguration();
+            modelBuilder.ApplyConfiguration(new GarrisonConfigurator());
         }
 
 

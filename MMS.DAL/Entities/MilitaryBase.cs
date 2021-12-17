@@ -15,6 +15,7 @@ namespace MMS
         public string BaseName { get; set; }
         public DateTime FoundDate { get; set; }
 
+        public List<Garrison> Garrison { get; set; }
 
     }
 }
