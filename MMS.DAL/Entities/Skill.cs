@@ -12,5 +12,9 @@ namespace MMS
         public string SkillName { get; set; }
         public string SkillDescription { get; set; }
 
+        public ICollection<PersonalMilitary> militarys { get; set; }
+
+        public List<MilitarySkill> MilitarysSkills { get; set; }
+
     }
 }

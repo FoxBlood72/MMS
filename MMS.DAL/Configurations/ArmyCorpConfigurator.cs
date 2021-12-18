@@ -12,6 +12,8 @@ namespace MMS.Configurations
             builder.HasOne(x => x.Commander);
             builder.Property(x => x.victories).HasColumnType("int");
             builder.Property(x => x.defeates).HasColumnType("int");
+
+            
             
         }
     }

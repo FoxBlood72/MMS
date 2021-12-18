@@ -13,8 +13,12 @@ namespace MMS
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string cnp { get; set; }
-        public char sex { get; set; }
+        public string sex { get; set; }
         public DateTime hire_date { get; set; }
         //public List<PersonalMilitary> Commanders { get; set; }
+
+        public ICollection<Skill> skills { get; set; }
+
+        public List<MilitarySkill> MilitarysSkills { get; set; }
     }
 }

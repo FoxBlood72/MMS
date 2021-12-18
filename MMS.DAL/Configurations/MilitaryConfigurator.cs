@@ -16,6 +16,15 @@ namespace MMS.Configurations
             builder.Property(x => x.hire_date).HasColumnType("Date").HasDefaultValueSql("GetDate()");
             builder.HasOne(x => x.divizion).WithMany(y => y.personalMilitaries);
             builder.HasOne(x => x.mBase).WithMany(y => y.personalMilitaries);
+            builder.HasMany(x => x.skills).WithMany(y => y.militarys)
+                .UsingEntity<MilitarySkill>(
+                j => j.HasOne(m => m.skill).WithMany(t => t.MilitarysSkills),
+                j => j.HasOne(m => m.military).WithMany(t => t.MilitarysSkills),
+                j => {
+                    j.Property(x => x.militaryGrade).HasDefaultValue("1.0");
+                    j.HasKey(t => new { t.skillId, t.militaryId });
+                }
+                );
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MMS
         public int CorpId { get; set; }
 
         [ForeignKey("PersonalMilitary")]
-        public int CommanderId { get; set; }
+        public int? CommanderId { get; set; }
 
         public PersonalMilitary Commander { get; set; }
 

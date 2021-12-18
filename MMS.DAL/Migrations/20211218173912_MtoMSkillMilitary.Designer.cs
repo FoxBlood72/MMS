@@ -4,14 +4,16 @@ using MMS.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MMS.DAL.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    partial class DB_ContextModelSnapshot : ModelSnapshot
+    [Migration("20211218173912_MtoMSkillMilitary")]
+    partial class MtoMSkillMilitary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -357,26 +359,6 @@ namespace MMS.DAL.Migrations
                     b.ToTable("States");
                 });
 
-            modelBuilder.Entity("MMS.StateConflict", b =>
-                {
-                    b.Property<int>("conflictId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("state1Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("state2Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("conflictId", "state1Id");
-
-                    b.HasIndex("state1Id");
-
-                    b.HasIndex("state2Id");
-
-                    b.ToTable("StateConflict");
-                });
-
             modelBuilder.Entity("MMS.ArmyCorp", b =>
                 {
                     b.HasOne("MMS.PersonalMilitary", "Commander")
@@ -459,39 +441,9 @@ namespace MMS.DAL.Migrations
                     b.Navigation("mBase");
                 });
 
-            modelBuilder.Entity("MMS.StateConflict", b =>
-                {
-                    b.HasOne("MMS.Conflict", "conflict")
-                        .WithMany("stateConflicts")
-                        .HasForeignKey("conflictId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MMS.State", "state1")
-                        .WithMany("state1Conflicts")
-                        .HasForeignKey("state1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MMS.State", "state2")
-                        .WithMany("state2Conflicts")
-                        .HasForeignKey("state2Id");
-
-                    b.Navigation("conflict");
-
-                    b.Navigation("state1");
-
-                    b.Navigation("state2");
-                });
-
             modelBuilder.Entity("MMS.ArmyCorp", b =>
                 {
                     b.Navigation("divizions");
-                });
-
-            modelBuilder.Entity("MMS.Conflict", b =>
-                {
-                    b.Navigation("stateConflicts");
                 });
 
             modelBuilder.Entity("MMS.DAL.Entities.Divizion", b =>
@@ -526,10 +478,6 @@ namespace MMS.DAL.Migrations
                     b.Navigation("bases");
 
                     b.Navigation("corps");
-
-                    b.Navigation("state1Conflicts");
-
-                    b.Navigation("state2Conflicts");
                 });
 #pragma warning restore 612, 618
         }
