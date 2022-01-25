@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MMS.DAL;
 using MMS.DAL.Entities;
 using System;
@@ -20,8 +21,8 @@ namespace MMS.Controllers
             _context = context;
         }
 
-        [HttpPost("AddMilitary")]
-        public async Task<IActionResult> AddMilitary([FromBody] Conflict conflict)
+        [HttpPost("AddConflict")]
+        public async Task<IActionResult> AddConflict([FromBody] Conflict conflict)
         {
             if (string.IsNullOrEmpty(conflict.name))
                 return BadRequest("The name of the conflict is null!");
@@ -32,6 +33,37 @@ namespace MMS.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+
+        [HttpPost("DeleteConflictById")]
+        public async Task DeleteSkill([FromBody] int id)
+        {
+            Conflict loc = await GetById(id);
+            _context.Conflicts.Remove(loc);
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpPost("GetConflictById")]
+        public async Task<Conflict> GetById([FromBody] int id)
+        {
+            var st = await _context.Conflicts.FindAsync(id);
+            return st;
+        }
+
+        [HttpGet("GetAllConflicts")]
+
+        public async Task<List<Conflict>> GetAll()
+        {
+            var Conflicts = await (await GetAllQuery()).ToListAsync();
+            return Conflicts;
+
+        }
+
+        private async Task<IQueryable<Conflict>> GetAllQuery()
+        {
+            var query = _context.Conflicts.AsQueryable();
+            return query;
         }
     }
 }

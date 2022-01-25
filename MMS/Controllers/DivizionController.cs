@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MMS.DAL;
 using MMS.DAL.Entities;
 using System;
@@ -34,6 +35,36 @@ namespace MMS.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("DeleteDivizionById")]
+        public async Task DeleteSkill([FromBody] int id)
+        {
+            Divizion loc = await GetById(id);
+            _context.Divizions.Remove(loc);
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpPost("GetDivizionById")]
+        public async Task<Divizion> GetById([FromBody] int id)
+        {
+            var st = await _context.Divizions.FindAsync(id);
+            return st;
+        }
+
+        [HttpGet("GetAllDivizions")]
+
+        public async Task<List<Divizion>> GetAll()
+        {
+            var Divizions = await (await GetAllQuery()).ToListAsync();
+            return Divizions;
+
+        }
+
+        private async Task<IQueryable<Divizion>> GetAllQuery()
+        {
+            var query = _context.Divizions.AsQueryable();
+            return query;
         }
 
     }

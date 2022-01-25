@@ -22,5 +22,10 @@ namespace MMS
         public int defeates;
         public State state { get; set; }
         public List<Divizion> divizions { get; set; }
+
+        public List<ArmyCorpMission> armyCorpMissions { get; set; }
+
+        public ICollection<Mission> missions;
+
     }
 }

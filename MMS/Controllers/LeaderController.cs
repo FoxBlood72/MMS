@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MMS.DAL;
 using MMS.DAL.Entities;
 using System;
@@ -20,7 +21,7 @@ namespace MMS.Controllers
             _context = context;
         }
 
-        [HttpPost("AddMilitary")]
+        [HttpPost("AddLeader")]
         public async Task<IActionResult> AddMilitary([FromBody] Leader leader)
         {
             if (string.IsNullOrEmpty(leader.Last_Name))
@@ -32,6 +33,36 @@ namespace MMS.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("DeleteLeaderById")]
+        public async Task DeleteSkill([FromBody] int id)
+        {
+            Leader loc = await GetById(id);
+            _context.Leaders.Remove(loc);
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpPost("GetLeaderById")]
+        public async Task<Leader> GetById([FromBody] int id)
+        {
+            var st = await _context.Leaders.FindAsync(id);
+            return st;
+        }
+
+        [HttpGet("GetAllLeaders")]
+
+        public async Task<List<Leader>> GetAll()
+        {
+            var Leaders = await (await GetAllQuery()).ToListAsync();
+            return Leaders;
+
+        }
+
+        private async Task<IQueryable<Leader>> GetAllQuery()
+        {
+            var query = _context.Leaders.AsQueryable();
+            return query;
         }
     }
 }

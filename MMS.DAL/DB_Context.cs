@@ -1,13 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MMS.Configurations;
 using MMS.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MMS.DAL
 {
-    public class DB_Context : DbContext
+    public class DB_Context : IdentityDbContext<
+        User,
+        Role,
+        int,
+        IdentityUserClaim<int>,
+        UserRole,
+        IdentityUserLogin<int>,
+        IdentityRoleClaim<int>,
+        IdentityUserToken<int>
+        >
     {
         public DB_Context(DbContextOptions<DB_Context> options) : base(options)
         {
@@ -27,6 +38,8 @@ namespace MMS.DAL
         public DbSet<Divizion> Divizions { get; set; }
         public DbSet<Garrison> Garrisons { get; set; }
 
+        public DbSet<MilitarySkill> MilitarySkill { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -42,6 +55,7 @@ namespace MMS.DAL
             modelBuilder.ApplyConfiguration(new ArmyCorpConfigurator());
             modelBuilder.ApplyConfiguration(new GarrisonConfigurator());
             modelBuilder.ApplyConfiguration(new SkillConfigurator());
+            modelBuilder.ApplyConfiguration(new MilitariySkillConfigurator());
         }
 
 
